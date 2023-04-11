@@ -1,8 +1,8 @@
 abstract class TargetTypeBase {
-  String? path;
-  Map<String, dynamic>? requestParameters;
+  String path;
+  dynamic requestParameters;
   Map<String, dynamic>? headers;
-  HttpMethod? method;
+  HttpMethod method;
 
   TargetTypeBase({
     required this.path,

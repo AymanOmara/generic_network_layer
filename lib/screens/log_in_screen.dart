@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-
+                          ElevatedButton(onPressed: ()=> cubit.fetchData(), child:const Text("login"))
                           ],
                         ),
                       ),

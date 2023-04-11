@@ -1,28 +1,34 @@
-
-
 import 'codable.dart';
+import 'message_type.dart';
 
 class BaseResponse<T extends Codable> implements Codable {
   String? message;
   bool? status;
   T? data;
-
-  BaseResponse(T da){
+  List<T> array = [];
+  MessageType? messageType;
+  BaseResponse(T da,this.messageType) {
     data = da;
   }
-  BaseResponse.parameterize({required this.status, required this.data, required this.message});
+
+
   @override
   fromJson(Map<String, dynamic>? json) {
-    data = (json?["data"] is List) ? (json?["data"] as List).map((e) => data?.fromJson( e ?? {})).toList() : data?.fromJson(json?["data"] ?? {});
-    return BaseResponse.parameterize(status: json!["status"], data:  data, message: json["message"]);
-
+    if (json?["data"] is List) {
+      array = (json?["data"] as List)
+          .map<T>((e) => data?.fromJson(e ?? {}))
+          .toList();
+    } else {
+      data = json?["data"] != null ? data?.fromJson(json?["data"] ?? {}) : null;
+    }
+    return this;
   }
 
-  @override
-  Map<String, dynamic> toJson() {
-    return data?.toJson() ?? {};
-  }
-}
+
+@override
+Map<String, dynamic> toJson() {
+  return data?.toJson() ?? {};
+}}
 
 enum ErrorType {
   serverError("server_error"),

@@ -9,18 +9,18 @@ class Login implements TargetTypeBase {
     required this.password,
   }) {
     headers = {'Content-Type': 'application/json', 'Accept': '*/*'};
-    requestParameters = {"Email": "karim557@gmail.com", "Password": "123Pa\$\$word!"};
+    requestParameters = {"Email": userName, "Password": password};
   }
 
   @override
-  late Map<String, dynamic>? headers;
+  Map<String, dynamic>? headers;
 
   @override
-  HttpMethod? method = HttpMethod.post;
+  HttpMethod method = HttpMethod.post;
 
   @override
-  String? path = "/api/Auth/token";
+  String path = "/api/Auth/token";
 
   @override
-  Map<String, dynamic>? requestParameters = {};
+  dynamic requestParameters;
 }
